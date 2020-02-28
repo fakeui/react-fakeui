@@ -1,6 +1,5 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { string, oneOfType, arrayOf, node } from 'prop-types';
-import { css } from '../tools/styles';
 
 const Box = ({
     color,
@@ -12,21 +11,25 @@ const Box = ({
     children,
     direction,
 }) => {
-    const className = css`
-        flex: 1;
-        width: ${width};
-        height: ${height};
-        margin: ${margin};
-        padding: ${padding};
-        display: flex;
-        box-sizing: border-box;
-        border-radius: ${radius};
-        flex-direction: ${direction};
-        justify-content: center;
-        background-color: ${color};
-    `;
+    const styles = useMemo(() => {
+        return {
+            container: {
+                flex: 1,
+                width,
+                height,
+                margin,
+                padding,
+                display: 'flex',
+                boxSizing: 'border-box',
+                borderRadius: `${radius}`,
+                flexDirection: `${direction}`,
+                justifyContent: 'center',
+                backgroundColor: `${color}`,
+            },
+        };
+    }, []);
 
-    return <div className={className}>{children}</div>;
+    return <div style={styles.container}>{children}</div>;
 };
 
 Box.propTypes = {

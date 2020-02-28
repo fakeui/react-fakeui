@@ -61,8 +61,5 @@
     "files": [
         "dist"
     ],
-    "dependencies": {
-        "@emotion/core": "^10.0.28",
-        "picostyle-react": "0.0.1"
-    }
+    "dependencies": {}
 }
