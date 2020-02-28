@@ -27,7 +27,7 @@ export const css = (strings, ...keys) => {
 export const keyframes = (strings, ...keys) => {
     const keyframeName = generateName('fakeui-keyframe');
     const raw = join(strings, keys);
-    const rule = `@keyframes ${keyframeName}{${raw}}`;
+    const rule = `@keyframes ${keyframeName}{ ${raw} }`;
 
     sheet.insertRule(rule, sheet.cssRules.length);
     return keyframeName;
