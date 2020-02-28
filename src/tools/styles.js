@@ -2,7 +2,6 @@
 const { sheet } = document.head.appendChild(document.createElement('style'));
 
 let i = 0;
-
 const generateName = prefix => {
     i += 1;
     return `${prefix}-${i}`;
