@@ -1,5 +1,5 @@
-// eslint-disable-next-line no-undef
-const { sheet } = document.head.appendChild(document.createElement('style'));
+const style = document.createElement('style');
+const { sheet } = document.head.appendChild(style);
 
 const join = (strings, keys) => {
     const result = [];
@@ -9,11 +9,17 @@ const join = (strings, keys) => {
     return result.join('');
 };
 
-const keyframes = keyframeName => (strings, ...keys) => {
-    const raw = join(strings, keys);
-    const rule = `@keyframes ${keyframeName}{ ${raw} }`;
+const exist = keyframeName => {
+    return !!Array.from(sheet.cssRules).find(
+        cssRule => keyframeName === cssRule.name,
+    );
+};
 
-    sheet.insertRule(rule, sheet.cssRules.length);
+const keyframes = keyframeName => (strings, ...keys) => {
+    if (!exist(keyframeName)) {
+        const cssText = `@keyframes ${keyframeName}{ ${join(strings, keys)} }`;
+        sheet.insertRule(cssText, sheet.cssRules.length);
+    }
     return keyframeName;
 };
 
