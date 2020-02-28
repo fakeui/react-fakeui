@@ -8,7 +8,7 @@ const generateName = prefix => {
     return `${prefix}-${i}`;
 };
 
-const template = (strings, keys) => {
+const join = (strings, keys) => {
     const result = [];
     strings.forEach((str, index) => {
         result.push(str, keys[index]);
@@ -18,7 +18,7 @@ const template = (strings, keys) => {
 
 export const css = (strings, ...keys) => {
     const className = generateName('fakeui-style');
-    const raw = template(strings, keys);
+    const raw = join(strings, keys);
     const rule = `.${className} { ${raw} }`;
 
     sheet.insertRule(rule, sheet.cssRules.length);
@@ -27,7 +27,7 @@ export const css = (strings, ...keys) => {
 
 export const keyframes = (strings, ...keys) => {
     const keyframeName = generateName('fakeui-keyframe');
-    const raw = template(strings, keys);
+    const raw = join(strings, keys);
     const rule = `@keyframes ${keyframeName}{${raw}}`;
 
     sheet.insertRule(rule, sheet.cssRules.length);
